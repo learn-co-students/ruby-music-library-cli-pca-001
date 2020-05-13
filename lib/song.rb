@@ -1,11 +1,13 @@
 require "concerns/findable.rb"
 
 class Song
-  @@all = []
   attr_accessor :name
   attr_reader :artist, :genre
   extend Concerns::Findable
   extend Concerns::Listable
+  extend Concerns::Nameable
+  extend Concerns::Persistable::ClassMethods
+  include Concerns::Persistable::InstanceMethods
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
@@ -14,18 +16,6 @@ class Song
   end
 
   class << self
-    def all
-      @@all
-    end
-
-    def destroy_all
-      all.clear
-    end
-
-    def create(name)
-      new(name).tap(&:save)
-    end
-
     def new_from_filename(filename)
       # "Artist - SongName - Genre"
       info = filename.split(" - ")
@@ -51,10 +41,6 @@ class Song
     def create_from_filename(filename)
       new_from_filename(filename).tap(&:save)
     end
-  end
-
-  def save
-    self.class.all << self
   end
 
   def artist=(artist)

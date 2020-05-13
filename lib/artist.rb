@@ -5,28 +5,13 @@ class Artist
   attr_reader :songs
   extend Concerns::Findable
   extend Concerns::Listable
+  extend Concerns::Nameable
+  extend Concerns::Persistable::ClassMethods
+  include Concerns::Persistable::InstanceMethods
 
   def initialize(name)
     @name = name
     @songs = []
-  end
-
-  class << self
-    def all
-      @@all ||= []
-    end
-
-    def destroy_all
-      all.clear
-    end
-
-    def create(name)
-      new(name).tap(&:save)
-    end
-  end
-
-  def save
-    self.class.all << self
   end
 
   def add_song(song)

@@ -1,6 +1,3 @@
-require "concerns/findable.rb"
-require "concerns/listable.rb"
-
 class Genre
   attr_accessor :name
   attr_reader :songs

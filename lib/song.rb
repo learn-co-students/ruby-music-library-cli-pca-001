@@ -41,7 +41,7 @@ class Song
     def find_from_user_input(input)
       index = input.to_i - 1
 
-      if index >= 0
+      if index >= 0 && index < all.size
         all.sort_by(&:name)[index]
       else
         find_by_name(input)

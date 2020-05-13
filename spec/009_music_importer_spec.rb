@@ -22,6 +22,7 @@ describe "MusicImporter" do
     end
 
     it "normalizes the filename to just the MP3 filename with no path" do
+      # binding.pry
       expect(music_importer.files).to include("Action Bronson - Larry Csonka - indie.mp3")
       expect(music_importer.files).to include("Real Estate - Green Aisles - country.mp3")
       expect(music_importer.files).to include("Real Estate - It's Real - hip-hop.mp3")

@@ -68,6 +68,6 @@ class Song
   end
 
   def to_s
-    "#{@artist.name} - #{@name} - #{@genre.name}"
+    @name
   end
 end

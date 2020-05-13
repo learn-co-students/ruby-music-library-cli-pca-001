@@ -1,4 +1,3 @@
-
 class MusicImporter
   attr_accessor :path
   attr_reader :files

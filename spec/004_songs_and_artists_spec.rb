@@ -57,6 +57,7 @@ describe "Associations — Song and Artist:" do
       it "assigns the current artist to the song's 'artist' property (song belongs to artist)" do
         artist.add_song(song)
 
+        #binding.pry
         expect(song.artist).to be(artist)
       end
 
@@ -73,9 +74,12 @@ describe "Associations — Song and Artist:" do
 
         expect(artist.songs).to include(song)
       end
-
+      # let(:song) { Song.new("In the Aeroplane Over the Sea") }
+      # let(:artist) { Artist.new("Neutral Milk Hotel") }
       it "does not add the song to the current artist's collection of songs if it already exists therein" do
-        2.times { artist.add_song(song) }
+        2.times do
+          artist.add_song(song)
+        end
 
         expect(artist.songs).to include(song)
         expect(artist.songs.size).to be(1)

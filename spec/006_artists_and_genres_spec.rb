@@ -12,6 +12,9 @@ describe "Associations — Artist and Genre:" do
         Song.new("The Luckiest Guy on the Lower East Side", artist, genre)
         Song.new("Long-Forgotten Fairytale", artist, other_genre)
 
+        # running into a weird issue where `artist.songs` had nothing in it, and `all` for `Artist` did _not_ get added in and I have no clue why...
+        # my genres method was `@songs.map(&:genre).uniq`
+
         expect(artist.genres).to include(genre)
         expect(artist.genres).to include(other_genre)
         expect(artist.genres.size).to be(2)

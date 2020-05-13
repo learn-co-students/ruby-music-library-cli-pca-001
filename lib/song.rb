@@ -16,16 +16,6 @@ class Song
   end
 
   class << self
-    def new_from_filename(filename)
-      # "Artist - SongName - Genre"
-      info = filename.split(" - ")
-      artist = Artist.find_or_create_by_name(info[0])
-      genre = File.basename(info[2], File.extname(info[2]))
-      genre = Genre.find_or_create_by_name(genre)
-
-      new(info[1], artist, genre)
-    end
-
     # finds the song based on some user input
     # numbered list or string match
     def find_from_user_input(input)
@@ -36,6 +26,16 @@ class Song
       else
         find_by_name(input)
       end
+    end
+
+    def new_from_filename(filename)
+      # "Artist - SongName - Genre"
+      info = filename.split(" - ")
+      artist = Artist.find_or_create_by_name(info[0])
+      genre = File.basename(info[2], File.extname(info[2]))
+      genre = Genre.find_or_create_by_name(genre)
+
+      new(info[1], artist, genre)
     end
 
     def create_from_filename(filename)

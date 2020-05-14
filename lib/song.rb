@@ -1,6 +1,6 @@
 class Song
   attr_accessor :name
-  attr_reader :artist
+  attr_reader :artist, :genre
 
   @@all = []
 
@@ -16,12 +16,11 @@ class Song
 
   def save
     @@all << self
+    self
   end
 
   def self.create(name)
-    song = new(name)
-    song.save
-    song
+    new(name).save
   end
 
   def self.destroy_all
@@ -31,10 +30,6 @@ class Song
   def artist=(artist)
     @artist = artist
     artist.add_song(self)
-  end
-
-  def genre
-    @genre
   end
 
   def genre=(genre)

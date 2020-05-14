@@ -1,5 +1,3 @@
-
-
 class Artist
   extend Concerns::Findable
 
@@ -23,12 +21,11 @@ class Artist
 
   def save
     @@all << self
+    self
   end
 
   def self.create(name)
-    artist = new(name)
-    artist.save
-    artist
+    new(name).save
   end
 
   def add_song(song)
@@ -39,8 +36,7 @@ class Artist
   def genres
     songs.map do |artist|
       artist.genre
-    end
-    .uniq
+    end.uniq
   end
 end
 

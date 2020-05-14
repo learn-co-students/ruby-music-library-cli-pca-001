@@ -20,12 +20,11 @@ class Song
 
   def save
     @@all << self
+    self
   end
 
   def self.create(name, artist = nil, genre = nil)
-    song = Song.new(name, artist, genre)
-    song.save
-    song
+    Song.new(name, artist, genre).save
   end
 
   def artist=(artist)

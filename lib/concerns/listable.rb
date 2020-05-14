@@ -1,6 +1,6 @@
 module Concerns
   module Listable
-    # Listable class should have @@all class var available
+    # Listable class should have .all class method available
 
     def list_all_alpha_by_name
       list_alpha_by_name(all)
@@ -20,16 +20,11 @@ module Concerns
 
     def list_by_attributes(collection, *attrs)
       sort_alpha_by_name(collection).each_with_index do |item, i|
-        str = "#{i + 1}. "
-
-        attrs.each do |attr|
-          str += "#{item.send(attr)}"
-          str += " - " unless attr == attrs.last
-        end
-        puts str
+        num = "#{i + 1}. "
+        strs = attrs.map { |attr| item.send(attr).to_s }
+        puts num + strs.join(" - ")
       end
       true
     end
-
   end
 end

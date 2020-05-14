@@ -1,7 +1,7 @@
 module Concerns
   module Nameable
     def create(name)
-      new(name).tap(&:save)
+      new(name).save
     end
   end
 end

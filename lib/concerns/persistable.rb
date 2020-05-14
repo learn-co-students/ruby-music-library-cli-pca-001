@@ -3,6 +3,7 @@ module Concerns
     module InstanceMethods
       def save
         self.class.all << self
+        self
       end
     end
 
@@ -14,6 +15,7 @@ module Concerns
       def all
         class_variable_get(:@@all)
       end
+
       def count
         all.count
       end

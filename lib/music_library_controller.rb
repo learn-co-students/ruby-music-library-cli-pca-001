@@ -1,5 +1,4 @@
 class MusicLibraryController
-
   def initialize(path = "./db/mp3s")
     @path = path
     @importer = MusicImporter.new(path).import
@@ -10,30 +9,24 @@ class MusicLibraryController
     help
     puts "What would you like to do?"
 
-    input = get_input
+    input = gets.chomp
     until input == "exit"
       handle_input(input)
-      input = get_input
+      input = gets.chomp
     end
-
   end
 
   def handle_input(input)
     case input
-    when "help"
-      help
-    when "list songs"
-      list_songs
-    when "list genres"
-      list_genres
-    when "list artists"
-      list_artists
+    when "play song", "list artists",
+          "list genres", "list songs", "help"
+      send(input.tr(" ", "_"))
+
     when "list artist"
       list_songs_by_artist
     when "list genre"
       list_songs_by_genre
-    when "play song"
-      play_song
+
     end
   end
 
@@ -51,10 +44,6 @@ class MusicLibraryController
     puts "Welcome to your music library!"
   end
 
-  def get_input
-    gets.chomp
-  end
-
   def list_songs
     Song.list_all_by_attributes(:artist, :name, :genre)
   end
@@ -69,19 +58,19 @@ class MusicLibraryController
 
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
-    artist = Artist.find_by_name(get_input)
+    artist = Artist.find_by_name(gets.chomp)
     print_artist_song_list(artist.songs) if artist
   end
 
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
-    genre = Genre.find_by_name(get_input)
+    genre = Genre.find_by_name(gets.chomp)
     print_genre_song_list(genre.songs) if genre
   end
 
   def play_song
     puts "Which song number would you like to play?"
-    song = Song.find_from_user_input(get_input)
+    song = Song.find_from_user_input(gets.chomp)
     puts "Playing #{song.name} by #{song.artist.name}" if song
   end
 

@@ -8,7 +8,6 @@ class Genre
   def initialize(name)
     @name = name
     @songs = []
-    save
   end
 
   def add_song(song)
@@ -20,7 +19,7 @@ class Genre
   end
 
   def artists
-    Song.all.select { |song| song.genre == self }.map(&:artist).uniq
+    @songs.map(&:artist).uniq
   end
 
   def self.all

@@ -90,6 +90,6 @@ class MusicLibraryController
   end
 
   def sort_class(array)
-    array.sort_by(&:name).uniq
+    array.sort_by(&:name)
   end
 end

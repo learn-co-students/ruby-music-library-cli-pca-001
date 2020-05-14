@@ -11,7 +11,9 @@ module Concerns
     end
 
     def create(name)
-      new(name)
+      instance = new(name)
+      instance.save
+      instance
     end
   end
 end
